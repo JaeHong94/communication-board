@@ -1,7 +1,9 @@
 package communication.board.comment.service;
 
+import communication.board.comment.entity.ArticleCommentCount;
 import communication.board.comment.entity.CommentPath;
 import communication.board.comment.entity.CommentV2;
+import communication.board.comment.repository.ArticleCommentCountRepository;
 import communication.board.comment.repository.CommentV2Repository;
 import communication.board.comment.service.request.CommentV2CreateRequest;
 import communication.board.comment.service.response.CommentPageResponse;
@@ -20,6 +22,7 @@ import static java.util.function.Predicate.not;
 public class CommentV2Service {
     private final Snowflake snowflake = new Snowflake();
     private final CommentV2Repository commentV2Repository;
+    private final ArticleCommentCountRepository articleCommentCountRepository;
 
     @Transactional
     public CommentResponse create(CommentV2CreateRequest request) {
@@ -37,6 +40,13 @@ public class CommentV2Service {
                         )
                 )
         );
+
+        int result = articleCommentCountRepository.increase(request.getArticleId());
+        if (result == 0) {
+            articleCommentCountRepository.save(
+                    ArticleCommentCount.init(request.getArticleId(), 1L)
+            );
+        }
 
         return CommentResponse.from(comment);
     }
@@ -79,6 +89,8 @@ public class CommentV2Service {
 
     private void delete(CommentV2 comment) {
         commentV2Repository.delete(comment);
+        articleCommentCountRepository.decrease(comment.getArticleId());
+
         if (!comment.isRoot()) {
             commentV2Repository.findByPath(comment.getCommentPath().getParentPath())
                     .filter(CommentV2::getDeleted)
@@ -104,5 +116,11 @@ public class CommentV2Service {
         return comments.stream()
                 .map(CommentResponse::from)
                 .toList();
+    }
+
+    public Long count(Long articleId) {
+        return articleCommentCountRepository.findById(articleId)
+                .map(ArticleCommentCount::getCommentCount)
+                .orElse(0L);
     }
 }
