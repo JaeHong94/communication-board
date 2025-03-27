@@ -38,6 +38,11 @@ public class ArticleController {
         return articleService.readAllInfiniteScroll(boardId, pageSize, lastArticleId);
     }
 
+    @GetMapping("/v1/articles/boards/{boardId}/count")
+    public Long count(@PathVariable Long boardId) {
+        return articleService.count(boardId);
+    }
+
     @PostMapping("/v1/articles")
     public ArticleResponse create(@RequestBody ArticleCreateRequest request) {
         return articleService.create(request);
