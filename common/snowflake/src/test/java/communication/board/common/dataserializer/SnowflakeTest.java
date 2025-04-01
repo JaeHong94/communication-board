@@ -1,4 +1,4 @@
-package communication.board.common.snowflake;
+package communication.board.common.dataserializer;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

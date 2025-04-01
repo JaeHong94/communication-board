@@ -1,4 +1,4 @@
-package communication.board.common.snowflake;
+package communication.board.common.dataserializer;
 
 import java.util.random.RandomGenerator;
 

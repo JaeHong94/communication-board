@@ -8,7 +8,7 @@ import communication.board.article.service.request.ArticleCreateRequest;
 import communication.board.article.service.request.ArticleUpdateRequest;
 import communication.board.article.service.response.ArticlePageResponse;
 import communication.board.article.service.response.ArticleResponse;
-import communication.board.common.snowflake.Snowflake;
+import communication.board.common.dataserializer.Snowflake;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

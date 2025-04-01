@@ -1,7 +1,7 @@
 package communication.board.article.api.data;
 
 import communication.board.article.entity.Article;
-import communication.board.common.snowflake.Snowflake;
+import communication.board.common.dataserializer.Snowflake;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.junit.jupiter.api.Test;

@@ -1,6 +1,6 @@
 package communication.board.like.service;
 
-import communication.board.common.snowflake.Snowflake;
+import communication.board.common.dataserializer.Snowflake;
 import communication.board.like.entity.ArticleLike;
 import communication.board.like.entity.ArticleLikeCount;
 import communication.board.like.repository.ArticleLikeCountRepository;
