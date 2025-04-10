@@ -2,10 +2,12 @@ package communication.board.hotarticle.service.response;
 
 import communication.board.hotarticle.client.ArticleClient;
 import lombok.Getter;
+import lombok.ToString;
 
 import java.time.LocalDateTime;
 
 @Getter
+@ToString
 public class HotArticleResponse {
     private Long articleId;
     private String title;

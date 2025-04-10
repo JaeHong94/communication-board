@@ -12,9 +12,7 @@ import org.springframework.transaction.event.TransactionalEventListener;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
 
 @Slf4j
 @Component
@@ -22,7 +20,6 @@ import java.util.concurrent.TimeoutException;
 public class MessageRelay {
     private final OutboxRepository outboxRepository;
     private final MessageRelayCoordinator messageRelayCoordinator;
-    private final KafkaTemplate<String, String> MessageRelayKafkaTemplate;
     private final KafkaTemplate<String, String> messageRelayKafkaTemplate;
 
     @TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
